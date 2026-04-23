@@ -1,0 +1,15 @@
+# Tokens e configs sensiveis
+.env
+
+# Checkpoints
+checkpoint*.json
+
+# Excels gerados
+*.xlsx
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/

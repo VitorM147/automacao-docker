@@ -1,5 +1,5 @@
 """
-Scanner de Dockerfiles do GitLab - Grupo DPSP (v2)
+Scanner de Dockerfiles do GitLab  (v2)
 Versao com ThreadPool adaptativo + Rate Limiter + Checkpoint.
 Continua de onde parou caso seja interrompido.
 """
@@ -24,9 +24,9 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 # ============================================================
 GITLAB_URL = "https://gitlab.com"
 PRIVATE_TOKEN = os.environ.get("GITLAB_TOKEN", "SEU_TOKEN_AQUI")
-GROUP_ID = "grupo-dpsp"
-OUTPUT_FILE = "dockerfiles_dpsp.xlsx"
-PARTIAL_FILE = "dockerfiles_dpsp_parcial.xlsx"
+GROUP_ID = "grupo-***"
+OUTPUT_FILE = "dockerfiles_****.xlsx"
+PARTIAL_FILE = "dockerfiles_****_parcial.xlsx"
 CHECKPOINT_FILE = "checkpoint.json"
 MAX_WORKERS = 10
 CHECKPOINT_INTERVAL = 10  # salva checkpoint a cada N projetos
@@ -443,7 +443,7 @@ def process_project(proj):
 def generate_excel(results, output_file):
     wb = Workbook()
     ws = wb.active
-    ws.title = "Dockerfiles DPSP"
+    ws.title = "Dockerfiles ***"
 
     hfont = Font(bold=True, color="FFFFFF", size=11)
     hfill = PatternFill(start_color="2F5496", end_color="2F5496", fill_type="solid")
@@ -501,7 +501,7 @@ def generate_excel(results, output_file):
 # ============================================================
 def main():
     print("=" * 60)
-    print("  Scanner de Dockerfiles - Grupo DPSP (v2)")
+    print("  Scanner de Dockerfiles - Grupo **** (v2)")
     print("  Modo: ThreadPool adaptativo + Checkpoint")
     print("=" * 60)
 

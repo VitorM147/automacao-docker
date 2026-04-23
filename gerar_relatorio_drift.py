@@ -78,7 +78,7 @@ def load_data():
         return results
 
     # Senao, le do Excel
-    excel_file = "dockerfiles_dpsp.xlsx"
+    excel_file = "dockerfiles_***.xlsx"
     if not os.path.exists(excel_file):
         print(f"ERRO: Nem {CHECKPOINT_FILE} nem {excel_file} encontrados.")
         return []
@@ -239,7 +239,7 @@ def create_resumo(wb, m):
     ws.column_dimensions["B"].width = 25
 
     data = [
-        ("INVENTARIO DOCKER - GRUPO DPSP", ""),
+        ("INVENTARIO DOCKER - GRUPO ***", ""),
         ("", ""),
         ("Projetos com Docker", m["projects_with_docker"]),
         ("Total de registros (imagem+branch)", m["total_images"]),
@@ -378,7 +378,7 @@ def create_prod(wb, m):
 # ============================================================
 def main():
     print("=" * 50)
-    print("  Relatorio de Drift - Docker DPSP")
+    print("  Relatorio de Drift - Docker ***")
     print("=" * 50)
 
     results = load_data()

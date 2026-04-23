@@ -8,7 +8,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 
 CHECKPOINT_FILE = "checkpoint.json"
-OUTPUT = "dockerfiles_dpsp_parcial.xlsx"
+OUTPUT = "dockerfiles_***_parcial.xlsx"
 
 with open(CHECKPOINT_FILE, "r", encoding="utf-8") as f:
     data = json.load(f)
@@ -24,7 +24,7 @@ if not results:
 
 wb = Workbook()
 ws = wb.active
-ws.title = "Dockerfiles DPSP (parcial)"
+ws.title = "Dockerfiles *** (parcial)"
 
 hfont = Font(bold=True, color="FFFFFF", size=11)
 hfill = PatternFill(start_color="2F5496", end_color="2F5496", fill_type="solid")

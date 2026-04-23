@@ -1,5 +1,5 @@
 """
-Relatorio de Drift de Imagens Docker - Grupo DPSP
+Relatorio de Drift de Imagens Docker - Grupo ***
 Le o checkpoint.json ou Excel existente e gera relatorio analitico
 com metricas de padronizacao, versoes EOL, uso de :latest, etc.
 """

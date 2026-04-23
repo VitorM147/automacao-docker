@@ -85,9 +85,9 @@ As configurações ficam no topo do arquivo `gitlab_dockerfile_scanner_v2.py`:
 | Variável | Padrão | Descrição |
 |----------|--------|-----------|
 | `GITLAB_URL` | `https://gitlab.com` | URL da instância GitLab |
-| `GROUP_ID` | `grupo-dpsp` | ID ou path do grupo a escanear |
-| `OUTPUT_FILE` | `dockerfiles_dpsp.xlsx` | Nome do Excel final |
-| `PARTIAL_FILE` | `dockerfiles_dpsp_parcial.xlsx` | Nome do Excel parcial |
+| `GROUP_ID` | `grupo-***` | ID ou path do grupo a escanear |
+| `OUTPUT_FILE` | `dockerfiles_***.xlsx` | Nome do Excel final |
+| `PARTIAL_FILE` | `dockerfiles_***_parcial.xlsx` | Nome do Excel parcial |
 | `CHECKPOINT_FILE` | `checkpoint.json` | Arquivo de checkpoint |
 | `MAX_WORKERS` | `10` | Número máximo de threads paralelas |
 | `CHECKPOINT_INTERVAL` | `10` | Salva checkpoint a cada N projetos |
@@ -129,11 +129,11 @@ Gera Excel analítico com 7 abas:
 
 ```
 ============================================================
-  Scanner de Dockerfiles - Grupo DPSP (v2)
+  Scanner de Dockerfiles - Grupo *** (v2)
   Modo: ThreadPool adaptativo + Checkpoint
 ============================================================
 
-Buscando projetos do grupo 'grupo-dpsp'...
+Buscando projetos do grupo 'grupo-***'...
   Pagina 1: +100 (total: 100)
   Pagina 2: +100 (total: 200)
   ...
@@ -141,10 +141,10 @@ Buscando projetos do grupo 'grupo-dpsp'...
   -> 0 ja processados (checkpoint)
   -> 1365 pendentes
 
-[1/1365] grupo-dpsp/projeto-a -> 5 registros
+[1/1365] grupo-***/projeto-a -> 5 registros
     [Prod] main | Dockerfile: node:20-slim (Debian (slim))
     [Dev] develop | Pipeline: python:3.11 (Debian (Python))
-[2/1365] grupo-dpsp/projeto-b -> Nenhum Docker encontrado
+[2/1365] grupo-***/projeto-b -> Nenhum Docker encontrado
   [CHECKPOINT] Salvo: 10/1365 projetos | 45 registros | API remaining: 280/300 | ETA: 65.2 min
 ...
 
@@ -157,7 +157,7 @@ Buscando projetos do grupo 'grupo-dpsp'...
   0 pausas por rate limit
 ============================================================
 
-Arquivo gerado: dockerfiles_dpsp.xlsx
+Arquivo gerado: dockerfiles_***.xlsx
 ```
 
 ## 🔐 Configuração do Token no GitLab
@@ -191,7 +191,7 @@ stages:
   - scan
 
 variables:
-  GROUP_ID: "grupo-dpsp"
+  GROUP_ID: "grupo-***"
 
 scan-dockerfiles:
   stage: scan
@@ -202,8 +202,8 @@ scan-dockerfiles:
     - python gitlab_dockerfile_scanner_v2.py
   artifacts:
     paths:
-      - dockerfiles_dpsp.xlsx
-      - dockerfiles_dpsp_parcial.xlsx
+      - dockerfiles_***.xlsx
+      - dockerfiles_***_parcial.xlsx
     expire_in: 30 days
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
@@ -256,7 +256,7 @@ scan-dockerfiles:
 ## 📝 Notas Importantes
 
 - **Checkpoint**: O scanner salva progresso automaticamente. Pode ser interrompido e retomado a qualquer momento sem perda de dados.
-- **Excel Parcial**: A cada 50 projetos, um Excel intermediário é gerado (`dockerfiles_dpsp_parcial.xlsx`) como backup.
+- **Excel Parcial**: A cada 50 projetos, um Excel intermediário é gerado (`dockerfiles_***_parcial.xlsx`) como backup.
 - **Idempotência**: O script pode ser executado múltiplas vezes com segurança. Projetos já processados são ignorados via checkpoint.
 - **Rate Limit**: O rate limiter adaptativo lê os headers da API em tempo real e ajusta a velocidade automaticamente. Zero risco de bloqueio.
 - **Todas as Branches**: O scanner varre todas as branches de cada projeto para cobertura completa (Prod, QA e Dev).
